@@ -1,0 +1,298 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{##}
+{#  <center>#}
+{#   <h1 align="center">Profile Edit</h1>#}
+{#    <form method="POST">#}
+{#        {% csrf_token %}#}
+{#     <table align="center">#}
+{##}
+{#      <tr>#}
+{#       <td> Name:</td>#}
+{#       <td>#}
+{#           <input type="text" name="name" value="{{ obj.name }}" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Age:</td>#}
+{#       <td><input type="text" name="age" value="{{ obj.age }}" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Address:</td>#}
+{#       <td><input type="text" name="address" value="{{ obj.address }}" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#           <td><label>Gender:</label></td>#}
+{#           <td><input type="radio" name="gender" value="female"> Female#}
+{#           <input type="radio" name="gender" value="male"> Male#}
+{#           <input type="radio" name="gender" value="other"> Others</td>#}
+{##}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{##}
+{#       <td>Contact:</td>#}
+{#       <td><input type="text" name="contact" value="{{ obj.contact }}" ></td>#}
+{#     </tr>#}
+{##}
+{##}
+{#     <tr>#}
+{##}
+{#       <td>Email:</td>#}
+{#       <td><input type="text" name="email" value="{{ obj.email }}" ></td>#}
+{#     </tr>#}
+{##}
+{#     <tr>#}
+{##}
+{#       <td>Password:</td>#}
+{#       <td><input type="text" name="password" value="{{ obj.password }}" ></td>#}
+{#     </tr>#}
+{##}
+{#     <tr>#}
+{##}
+{#       <td>Re-enter Password:</td>#}
+{#       <td><input type="text" name="repass" value="{{ obj.repass }}" ></td>#}
+{#     </tr>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#       <td><input type="submit"value="post"></td>#}
+{##}
+{#         <a href="{% url 'patient_edit' idd=ob.p_id %}">Edit</a>#}
+{##}
+{##}
+{#    </table>#}
+{#   </form>#}
+{#  </center>#}
+{#{% if msg %}#}
+{#<script>#}
+{#    alert("{{ message }}")#}
+{#</script>#}
+{#{% endif %}#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{##}
+{#*********************************#}
+
+{##}
+{##}
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 80px;">#}
+{#<body>#}
+{#<center>#}
+{#    <h1>Profile Edit</h1>#}
+{#    <form method="POST">#}
+{#        {% csrf_token %}#}
+{#        <table>#}
+{#        {% for obj in obj %}#}
+{#            <tr>#}
+{#                <td>Name:</td>#}
+{#                <td><input type="text" name="name" value="{{obj.name }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Age:</td>#}
+{#                <td><input type="text" name="age" value="{{obj.age }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Address:</td>#}
+{#                <td><input type="text" name="address" value="{{obj.address }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Gender:</td>#}
+{#                <td>#}
+{#                    <input type="radio" name="gender" value="female" {% if obj.gender == 'female' %}checked{% endif %}> Female#}
+{#                    <input type="radio" name="gender" value="male" {% if obj.gender == 'male' %}checked{% endif %}> Male#}
+{#                    <input type="radio" name="gender" value="other" {% if obj.gender == 'other' %}checked{% endif %}> Others#}
+{#                </td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Contact:</td>#}
+{#                <td><input type="text" name="contact" value="{{obj.phno }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Email:</td>#}
+{#                <td><input type="text" name="email" value="{{ obj.email }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Password:</td>#}
+{#                <td><input type="text" name="password" value="{{obj.password }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td>Re-enter Password:</td>#}
+{#                <td><input type="text" name="repass" value="{{obj.repass }}"></td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td colspan="2"><input type="submit" value="Update Profile"></td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </table>#}
+{#    </form>#}
+{#</center>#}
+{##}
+{#{% if msg %}#}
+{#<script>#}
+{#    alert("{{ msg }}");#}
+{#</script>#}
+{#{% endif %}#}
+{#</body>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+{% extends 'temp/patient_home.html' %}
+
+{% block base %}
+<section id="c" style="padding-top: 80px; display:flex; justify-content:center; align-items:center; min-height:100vh; background:#f4f7fa; font-family: 'Segoe UI', sans-serif;">
+    <style>
+    /* Styling same as reg_hos with reduced td height and bottom padding */
+    .form-container {
+        background: #fff;
+        padding: 24px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        max-width: 460px;
+        width: 100%;
+    }
+    h1 {
+        font-size: 28px;
+        color: #1D63A6;
+        margin-bottom: 10px !important ;
+        font-weight: 600;
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: separate;
+    }
+    td {
+        padding: 4px 10px 8px 10px !important; /* Added bottom padding */
+        vertical-align: middle !important;
+        font-size: 14px;
+    }
+    td:first-child {
+        padding: 4px 10px 8px 10px !important;
+        width: 100px;
+        font-weight: 500;
+        color: #333;
+        text-align: left;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 4px 10px !important;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #f7f7f7;
+        transition: all 0.3s ease;
+        margin-bottom: 0.1px;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        border-color: #1D63A6;
+        outline: none;
+        box-shadow: 0 0 6px rgba(29, 99, 166, 0.2);
+        background-color: #fff;
+    }
+    .radio-group {
+        display: flex;
+        gap: 15px;
+        font-size: 14px;
+        color: #333;
+    }
+    .radio-group input[type="radio"] {
+        cursor: pointer;
+    }
+    input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background-color: #1D63A6;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background-color: #145b8c;
+    }
+</style>
+
+
+    <div class="form-container">
+        <h1>Profile Edit</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {% for obj in obj %}
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="{{ obj.name }}"></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="text" name="age" value="{{ obj.age }}"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>
+                    <textarea name="address" rows="3" style="width: 100%; padding: 4px 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; background-color: #f7f7f7;">{{ obj.address }}</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Gender:</td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="female" {% if obj.gender == 'female' %}checked{% endif %}> Female</label>
+                            <label><input type="radio" name="gender" value="male" {% if obj.gender == 'male' %}checked{% endif %}> Male</label>
+                            <label><input type="radio" name="gender" value="other" {% if obj.gender == 'other' %}checked{% endif %}> Others</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact:</td>
+                    <td><input type="text" name="contact" value="{{ obj.phno }}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="email" value="{{ obj.email }}"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" value="{{ obj.password }}"></td>
+                </tr>
+                <tr>
+                    <td>Re-enter Password:</td>
+                    <td><input type="password" name="repass" value="{{ obj.repass }}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <input type="submit" value="Update Profile">
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+</section>
+
+{% if msg %}
+<script>
+    alert("{{ msg }}");
+</script>
+{% endif %}
+{% endblock %}

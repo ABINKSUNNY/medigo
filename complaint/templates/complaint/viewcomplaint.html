@@ -1,0 +1,73 @@
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#{% csrf_token %}#}
+{#<center>#}
+{#<h1 align="center">VIEW COMPLAINTS</h1>#}
+{#<br>#}
+{##}
+{# <table align="center" border="1">#}
+{# <tr>#}
+{#  <td>SlNo</td>#}
+{#    <td>NAME</td>#}
+{#    <td>COMPLAINTS</td>#}
+{#    <td>DATE</td>#}
+{#     <td>TIME</td>#}
+{# </tr>#}
+{##}
+{#{% for i in cb %}#}
+{#    <tr>#}
+{#        <td></td>#}
+{#        <td>{{ i.p_id }}</td>#}
+{#        <td>{{ i.complaint }}</td>#}
+{#        <td>{{ i.date }}</td>#}
+{#        <td>{{ i.time }}</td>#}
+{##}
+{#        <td><a href="{% url 'postreply' idd=i.c_id %}">reply</a></td>#}
+{#       </tr>#}
+{#     {% endfor %}#}
+{# </table></center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+<section id="c">
+  {% csrf_token %}
+  <h1 style="text-align: center;">VIEW COMPLAINTS</h1>
+  <br>
+
+  <table border="1" style="margin: 0 auto;">
+    <thead>
+      <tr>
+        <th>SlNo</th>
+        <th>NAME</th>
+        <th>COMPLAINTS</th>
+        <th>DATE</th>
+        <th>TIME</th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in cb %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.patient.name }}</td>
+        <td>{{ i.complaint }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.time }}</td>
+{#        <td><a href="{% url 'postreply' idd=i.c_id %}#reply-section">Reply</a></td>#}
+        <td><a href="{% url 'postreply' idd=i.c_id %}#reply-section" class="btn btn-success btn-sm">Reply</a></td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" style="text-align:center;">No complaints found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

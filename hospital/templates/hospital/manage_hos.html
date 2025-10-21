@@ -1,0 +1,82 @@
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#  <center>#}
+{#   <h1 align="center">HOSPITALS</h1>#}
+{#    <br>#}
+{##}
+{#     <table align="center" border="1">#}
+{#       <tr>#}
+{#         <td>Slno</td>#}
+{#         <td>HOSPITAL NAME</td>#}
+{#         <td>ADDRESS</td>#}
+{#         <td>CONTACT</td>#}
+{#         <td>EMAIL</td>#}
+{#         <td>SPECIALITY</td>#}
+{#         <td>DEPARTMENT</td>#}
+{#       </tr>#}
+{##}
+{#{% for i in ab %}#}
+{#       <tr>#}
+{#         <td></td>#}
+{#         <td>{{ i.hospitalname }}</td>#}
+{#         <td>{{ i.address }}</td>#}
+{#         <td>{{ i.contact }}</td>#}
+{#         <td>{{ i.email }}</td>#}
+{#         <td>{{ i.speciality }}</td>#}
+{#         <td>{{i.department }}</td>#}
+{#         <td><a href="{% url 'approv' idd=i.h_id %}">Approve</a></td>#}
+{#         <td><a href="{% url 'rejec' idd=i.h_id %}">Reject</a></td>#}
+{##}
+{#       </tr>#}
+{#         {% endfor %}#}
+{#     </table>#}
+{#  </center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px">
+  <div class="card">
+    <h1>Hospitals</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Slno</th>
+          <th>Hospital Name</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Speciality</th>
+{#          <th>Department</th>#}
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in ab %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.hospitalname }}</td>
+          <td>{{ i.address }}</td>
+          <td>{{ i.contact }}</td>
+          <td>{{ i.email }}</td>
+          <td>{{ i.speciality }}</td>
+{#          <td>{{ i.department }}</td>#}
+          <td><a href="{% url 'approv' idd=i.h_id %}#c" style="color:green; font-weight:bold;">Approve</a></td>
+          <td><a href="{% url 'rejec' idd=i.h_id %}#c" style="color:red; font-weight:bold;">Reject</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="9" style="text-align:center;">No hospitals found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

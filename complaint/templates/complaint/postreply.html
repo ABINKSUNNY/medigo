@@ -1,0 +1,244 @@
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" >#}
+{#<body>#}
+{#<center>#}
+{# <h1 align="center">reply</h1>#}
+{# <form method="post">#}
+{#    {% csrf_token %}#}
+{#  <table align="center">#}
+{#      {% for i in  cb %}#}
+{#   <tr>#}
+{#    <td>Complaint</td>#}
+{#    <td>{{ i.complaint}}</td>#}
+{#   </tr>#}
+{#      {% endfor %}#}
+{##}
+{#      <tr>#}
+{#    <td>Reply</td>#}
+{#    <td><input type="text" name="reply"></td>#}
+{#   </tr>#}
+{#   <tr>#}
+{#    <td><input type="submit"value="post"></td>#}
+{#  </table>#}
+{# </form>#}
+{#</center>#}
+{#</body>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{##}
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{#<style>#}
+{#  body, html {#}
+{#    margin: 0;#}
+{#    padding: 0;#}
+{#    height: 100%;#}
+{#    background-color: #f0f2f5; /* Facebook-like light gray background */#}
+{#    font-family: Arial, sans-serif;#}
+{#  }#}
+{##}
+{#  #reply-section {#}
+{#    min-height: 100vh; /* full viewport height */#}
+{#    display: flex;#}
+{#    justify-content: center;#}
+{#    align-items: center;#}
+{#    padding: 20px;#}
+{#  }#}
+{##}
+{#  .reply-card {#}
+{#    background: #fff;#}
+{#    border-radius: 8px;#}
+{#    box-shadow: 0 2px 5px rgba(0,0,0,0.15);#}
+{#    padding: 30px 25px;#}
+{#    width: 100%;#}
+{#    max-width: 600px;#}
+{#    min-height: 500px;#}
+{#  }#}
+{##}
+{#  .reply-card h2 {#}
+{#    margin-bottom: 20px;#}
+{#    color: #1877f2;#}
+{#    text-align: center;#}
+{#  }#}
+{##}
+{#  .complaint-box {#}
+{#    background: #f0f2f5;#}
+{#    border-radius: 8px;#}
+{#    padding: 15px;#}
+{#    margin-bottom: 20px;#}
+{#    color: #050505;#}
+{#    font-size: 16px;#}
+{#    line-height: 1.4;#}
+{#    box-shadow: inset 0 0 5px #ccc;#}
+{#  }#}
+{##}
+{#  textarea[name="reply"] {#}
+{#    resize: vertical;#}
+{#    min-height: 250px;#}
+{#    border-radius: 6px;#}
+{#    border: 1px solid #ccd0d5;#}
+{#    padding: 10px;#}
+{#    font-size: 15px;#}
+{#    font-family: inherit;#}
+{#    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);#}
+{#    transition: border-color 0.3s ease;#}
+{#    width: 100%;#}
+{#  }#}
+{##}
+{#  textarea[name="reply"]:focus {#}
+{#    border-color: #1877f2;#}
+{#    outline: none;#}
+{#  }#}
+{##}
+{#  button[type="submit"] {#}
+{#    background-color: #1877f2;#}
+{#    border: none;#}
+{#    color: white;#}
+{#    padding: 12px;#}
+{#    font-size: 16px;#}
+{#    font-weight: 600;#}
+{#    border-radius: 6px;#}
+{#    cursor: pointer;#}
+{#    transition: background-color 0.3s ease;#}
+{#    width: 100%;#}
+{#  }#}
+{##}
+{#  button[type="submit"]:hover {#}
+{#    background-color: #145dbf;#}
+{#  }#}
+{#</style>#}
+{##}
+{#<section id="reply-section">#}
+{#  <div class="reply-card">#}
+{#    <h2>Reply to Complaint</h2>#}
+{##}
+{#    {% for i in cb %}#}
+{#      <div class="complaint-box">#}
+{#        <strong>Complaint:</strong>#}
+{#        <p>{{ i.complaint }}</p>#}
+{#      </div>#}
+{#    {% endfor %}#}
+{##}
+{#    <form method="post">#}
+{#      {% csrf_token %}#}
+{#      <textarea name="reply" placeholder="Write your reply..." required></textarea>#}
+{#      <button type="submit">Post Reply</button>#}
+{#    </form>#}
+{#  </div>#}
+{#</section>#}
+{#</section>#}
+{#{% endblock %}#}
+
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  #reply-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 40px;
+  }
+
+  .reply-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    padding: 30px 25px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 500px;
+  }
+
+  .reply-card h2 {
+    margin-bottom: 20px;
+    color: #1877f2;
+    text-align: center;
+  }
+
+  .complaint-box {
+    background: #f0f2f5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #050505;
+    font-size: 16px;
+    line-height: 1.4;
+    box-shadow: inset 0 0 5px #ccc;
+  }
+
+  textarea[name="reply"] {
+    resize: vertical;
+    min-height: 250px;
+    border-radius: 6px;
+    border: 1px solid #ccd0d5;
+    padding: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
+    transition: border-color 0.3s ease;
+    width: 100%;
+  }
+
+  textarea[name="reply"]:focus {
+    border-color: #1877f2;
+    outline: none;
+  }
+
+  button[type="submit"] {
+    background-color: #1877f2;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #145dbf;
+  }
+
+  @media (max-width: 600px) {
+    .reply-card {
+      padding: 20px 15px;
+      min-height: 400px;
+    }
+  }
+</style>
+
+<section id="reply-section">
+  <div class="reply-card">
+    <h2>Reply to Complaint</h2>
+
+    {% for i in cb %}
+      <div class="complaint-box">
+        <strong>Complaint:</strong>
+        <p>{{ i.complaint }}</p>
+      </div>
+    {% endfor %}
+
+    <form method="post">
+      {% csrf_token %}
+      <textarea name="reply" placeholder="Write your reply..." required></textarea>
+      <button type="submit">Post Reply</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

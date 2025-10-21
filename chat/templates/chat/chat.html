@@ -1,0 +1,71 @@
+{#{% extends 'temp/doc_home.html' %}#}
+{#<section id="c" style="padding-top: 100px;" >#}
+{#{% block base %}#}
+{#<body>#}
+{#<h1 align="center"></h1>#}
+{#<form method="post">#}
+{#    {% csrf_token %}#}
+{#<table>#}
+{##}
+{#    <tr>#}
+{#        <td>message</td>#}
+{#        <td height="50"><input type="text" name="msg"></td>#}
+{#    </tr>#}
+{#        <tr>#}
+{#        <td><input type="submit" name="send" value="send" class="btn btn-primary"></td>#}
+{#    </tr>#}
+{##}
+{#</table>#}
+{#    <br>#}
+{#    <br>#}
+{# </form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</section>#}
+{#</html>#}
+
+
+{##}
+{#{% extends 'temp/doc_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{#    <div class="container">#}
+{#        <div class="card shadow p-4">#}
+{#            <h3 class="text-center mb-4">Chat with Patient</h3>#}
+{##}
+{#            <form method="post">#}
+{#                {% csrf_token %}#}
+{#                <div class="form-group mb-3">#}
+{#                    <label for="msg">Message</label>#}
+{#                    <input type="text" class="form-control" name="msg" id="msg" required>#}
+{#                </div>#}
+{#                <button type="submit" name="send" class="btn btn-primary">Send</button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/doc_home.html' %}
+
+{% block base %}
+<section id="c" style="padding: 60px 0; background-color: #f0f2f5; display: flex; justify-content: center;">
+  <div style="width: 100%; max-width: 500px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; font-family: Arial, sans-serif;">
+    <h3 style="text-align: center; color: #1877f2; margin-bottom: 20px;">Messenger</h3>
+
+    <form method="post" style="display: flex; flex-direction: column;">
+      {% csrf_token %}
+      <label for="msg" style="margin-bottom: 8px; font-weight: bold; color: #333;">Type a message</label>
+      <textarea name="msg" id="msg" rows="4" required
+        style="resize: none; padding: 12px 14px; font-size: 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; margin-bottom: 15px;"></textarea>
+
+      <button type="submit" name="send"
+        style="align-self: flex-end; background-color: #1877f2; color: white; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 14px;">
+        Send
+      </button>
+    </form>
+  </div>
+</section>
+{% endblock %}

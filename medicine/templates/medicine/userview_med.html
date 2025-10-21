@@ -1,0 +1,37 @@
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+    <section id="c" >
+<body>
+ <center>
+   <h1 align="center">MEDICINES</h1>
+    <br>
+
+     <table align="center" border="1">
+       <tr>
+         <td>Slno</td>
+         <td>Medicine name</td>
+         <td>Brand</td>
+         <td>Rate</td>
+         <td>Description</td>
+          <td>Image</td>
+       </tr>
+
+ {% for i in obj %}
+
+       <tr>
+         <td></td>
+         <td>{{ i.name }}</td>
+         <td>{{ i.brand}}</td>
+         <td>{{ i.price }}</td>
+         <td>{{ i.description }}</td>
+         <td>{{ i.image }}</td>
+         <td><a href="">Add</a> </td> <td><a href="">Remove</a></td>
+       </tr>
+
+ {% endfor %}
+
+     </table>
+  </center>
+</body>
+    </section>
+{% endblock %}

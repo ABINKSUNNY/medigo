@@ -1,0 +1,79 @@
+{#{% extends 'temp/hospital_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{# <center>#}
+{#   <h1 align="center">DOCTORS</h1>#}
+{#    <br>#}
+{##}
+{#     <table align="center" border="1">#}
+{#       <tr>#}
+{#         <td>Slno</td>#}
+{#         <td>DOCTOR NAME</td>#}
+{#         <td>AGE</td>#}
+{#         <td>SPECIALITY</td>#}
+{#         <td>QUALIFICATION</td>#}
+{#         <td>GENDER</td>#}
+{#       </tr>#}
+{##}
+{#{% for i in obj %}#}
+{##}
+{#       <tr>#}
+{#         <td></td>#}
+{#         <td>{{ i.doc_name }}</td>#}
+{#         <td>{{ i.doc_age }}</td>#}
+{#         <td>{{ i.specialization }}</td>#}
+{#         <td>{{ i.qualification }}</td>#}
+{#         <td>{{ i.gender }}</td>#}
+{#         <td><a href="{% url 'delete' idd=i.doc_id %}">Remove</a></td>#}
+{#       </tr>#}
+{##}
+{#{% endfor %}#}
+{#     </table>#}
+{#  </center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+{% extends 'temp/hospital_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px">
+  <div class="card">
+    <h1>Doctors</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Doctor Name</th>
+          <th>Age</th>
+          <th>Specialization</th>
+          <th>Qualification</th>
+          <th>Gender</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in obj %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td data-label="Doctor Name">{{ i.doc_name }}</td>
+          <td data-label="Age">{{ i.doc_age }}</td>
+          <td data-label="Specialization">{{ i.specialization }}</td>
+          <td data-label="Qualification">{{ i.qualification }}</td>
+          <td data-label="Gender">{{ i.gender }}</td>
+          <td data-label="Action">
+            <a href="{% url 'delete' idd=i.doc_id %}" style="color: red; text-decoration: none;">Remove</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7">No doctors found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

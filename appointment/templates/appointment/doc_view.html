@@ -1,0 +1,125 @@
+{#{% extends 'temp/doc_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#  <label for="search">Search:</label>#}
+{#<input type="search" id="search" name="search">#}
+{#<center>#}
+{##}
+{# <h1 align="center">APPOINTMENTS</h1>#}
+{# <table align="center" border="1">#}
+{##}
+{# <tr>#}
+{#    <td>SlNo</td>#}
+{#    <td>PATIENT</td>#}
+{#    <td>AGE</td>#}
+{#    <td>GENDER</td>#}
+{#    <td>ADDRESS</td>#}
+{#    <td>CONTACT</td>#}
+{##}
+{#    <td>DATE</td>#}
+{#    <td>TIME</td>#}
+{#    <td>TYPE</td>#}
+{# </tr>#}
+{#{% for i in cd %}#}
+{#    <tr>#}
+{#        <td></td>#}
+{#        <td>{{ i.patient.name }}</td>#}
+{#        <td>{{ i.patient.age }}</td>#}
+{#        <td>{{ i.patient.gender}}</td>#}
+{#        <td>{{ i.patient.address}}</td>#}
+{#        <td>{{ i.patient.phno}}</td>#}
+{#        <td>{{ i.date }}</td>#}
+{#        <td>{{ i.time }}</td>#}
+{#        <td>{{ i.type }}</td>#}
+{##}
+{##}
+{#       </tr>#}
+{#     {% endfor %}#}
+{# </table></center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+
+{#*****************************#}
+{% extends 'temp/doc_home.html' %}
+{% block base %}
+<section id="c">
+  <div class="card" style="max-width: 1100px; margin: auto; padding: 20px;">
+    <h1>APPOINTMENTS</h1>
+
+    <!-- Date Filter Form -->
+    <form method="get" class="mb-3" style="margin-bottom: 1rem;">
+      <label for="date" style="margin-right: 10px;">Filter by Date:</label>
+      <input type="date" id="date" name="date" value="{{ selected_date }}">
+      <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 8px;">Filter</button>
+      {% if selected_date %}
+        <a href="{% url 'docview_app' %}" class="btn btn-danger" style="margin-left: 8px; border-radius: 12px;">Clear</a>
+
+      {% endif %}
+    </form>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>SlNo</th>
+          <th>Patient</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if selected_date %}
+          {% if cd %}
+            {% for i in cd %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.patient.name }}</td>
+                <td>{{ i.patient.age }}</td>
+                <td>{{ i.patient.gender }}</td>
+                <td>{{ i.patient.address }}</td>
+                <td>{{ i.patient.phno }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.time }}</td>
+                <td>{{ i.type }}</td>
+                <td>{{ i.status }}</td>
+                <td>
+                    <a href="{% url 'chat' idd=i.a_id %}#c" style="
+                        background-color: #28a745;
+                        color: white;
+                        padding: 6px 12px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        display: inline-block;
+                        ">
+                        Message
+                    </a>
+                </td>
+
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="10" class="text-center" style="color:#555;">No appointments found for selected date.</td>
+            </tr>
+          {% endif %}
+        {% else %}
+          <tr>
+            <td colspan="10" class="text-center" style="color:#555;">No appointments found.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

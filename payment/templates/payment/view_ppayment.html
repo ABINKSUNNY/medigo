@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+ <center>
+   <h1 align="center">PHARMACY PAYMENT</h1>
+    <br>
+
+     <table align="center" border="1">
+       <tr>
+         <td>Slno</td>
+         <td>NAME</td>
+         <td>ORDER ID</td>
+         <td>AMOUNT</td>
+         <td>DATE</td>
+         <td>TIME</td>
+       </tr>
+
+ {% for i in obj %}
+
+       <tr>
+         <td></td>
+         <td>{{ i.p_id }}</td>
+         <td>{{ i.o_id }}</td>
+         <td>{{ i.amount }}</td>
+         <td>{{ i.date }}</td>
+         <td>{{ i.time }}</td>
+       </tr>
+
+ {% endfor %}
+
+     </table>
+  </center>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{# <center>#}
+{#   <h1 align="center">PATIENTS</h1>#}
+{#    <br>#}
+{##}
+{#     <table align="center" border="1">#}
+{#       <tr>#}
+{#         <td>Slno</td>#}
+{#         <td>NAME</td>#}
+{#         <td>AGE</td>#}
+{#         <td>GENDER</td>#}
+{#         <td>CONTACT</td>#}
+{#         <td>EMAIL</td>#}
+{#         <td>ADDRESS</td>#}
+{#       </tr>#}
+{##}
+{# {% for i in ob %}#}
+{##}
+{#       <tr>#}
+{#         <td></td>#}
+{#         <td>{{ i.name }}</td>#}
+{#         <td>{{ i.age }}</td>#}
+{#         <td>{{ i.gender }}</td>#}
+{#         <td>{{ i.phno }}</td>#}
+{#         <td>{{ i.email }}</td>#}
+{#         <td>{{ i.address }}</td>#}
+{##}
+{#         <td><a href="{% url 'dele' idd=i.p_id %}">Remove</a></td>#}
+{#       </tr>#}
+{##}
+{#         {% endfor %}#}
+{##}
+{#     </table>#}
+{#  </center>#}
+{##}
+{#</body>#}
+{#{% endblock %}#}
+{#</section>#}
+
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px">
+  <div class="card">
+    <h1>Patients</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Slno</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in ob %}
+        <tr>
+          <td data-label="Slno">{{ forloop.counter }}</td>
+          <td data-label="Name">{{ i.name }}</td>
+          <td data-label="Age">{{ i.age }}</td>
+          <td data-label="Gender">{{ i.gender }}</td>
+          <td data-label="Contact">{{ i.phno }}</td>
+          <td data-label="Email">{{ i.email }}</td>
+          <td data-label="Address">{{ i.address }}</td>
+          <td data-label="Action">
+            <a href="{% url 'dele' idd=i.p_id %}#c" style="color:#d9534f; font-weight: bold;" onclick="return confirm('Are you sure you want to remove this patient?')">Remove</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8" style="text-align:center;">No patients found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

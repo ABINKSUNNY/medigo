@@ -1,0 +1,35 @@
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+    <section id="c" >
+<body>
+ <center>
+   <h1 align="center">DOCTORS</h1>
+    <br>
+
+     <table align="center" border="1">
+       <tr>
+         <td>Slno</td>
+         <td>DOCTOR NAME</td>
+         <td>AGE</td>
+         <td>SPECIALITY</td>
+         <td>QUALIFICATION</td>
+         <td>GENDER</td>
+
+       </tr>
+{% for i in obj %}
+       <tr>
+         <td></td>
+         <td>{{ i.doc_name }}</td>
+         <td>{{ i.doc_age }}</td>
+         <td>{{ i.specialization }}</td>
+         <td>{{ i.qualification }}</td>
+         <td>{{ i.gender }}</td>
+         <td><a href="{% url 'approve' idd=i.doc_id  %}">Approve</a></td>
+         <td><a href="{% url 'rejecte' idd=i.doc_id %}">Reject</a></td>
+
+       </tr>
+         {% endfor %}
+     </table>
+  </center>
+  </section>
+{% endblock %}

@@ -1,0 +1,294 @@
+{#{% extends 'temp/index.html' %}#}
+{#{% block base %}#}
+{#<section id="c" >#}
+{#<center>#}
+{#    <br>#}
+{#    <br>#}
+{# <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <h1>LOGIN</h1>#}
+{#        <table align="centre">#}
+{#       <tr style="color: black;height: 1cm" >#}
+{#         <td>Username&nbsp;&nbsp;</td>#}
+{#         <td><input type="text" autocomplete="off" name="username" required class="form-control"></td>#}
+{#       </tr>#}
+{##}
+{#       <tr style="color: black;height: 2cm">#}
+{#         <td>Password&nbsp;&nbsp;</td>#}
+{#         <td><input type="password" autocomplete="off" name="password" required class="form-control"></td>#}
+{#       </tr>#}
+{#            <tr >#}
+{#                <td></td>#}
+{#            <td><input type="submit" name="Login" value="Login" class="btn btn-primary"></td>#}
+{#            </tr>#}
+{#        </table>#}
+{#    </form>#}
+{#    {% if inv %}#}
+{#        <script>alert("{{ inv }}")</script>#}
+{#    {% endif %}#}
+{#        </center>#}
+{#</section>#}
+{#{% endblock %}#}
+{##}
+{##}
+{##}
+{#......#}
+{##}
+{##}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Login</title>#}
+{#    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">#}
+{#    <style>#}
+{#        * {#}
+{#            box-sizing: border-box;#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Inter', sans-serif;#}
+{#            background: linear-gradient(135deg, #667eea, #764ba2);#}
+{#            height: 100vh;#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            align-items: center;#}
+{#        }#}
+{##}
+{#        .login-card {#}
+{#            background: white;#}
+{#            padding: 2.5rem;#}
+{#            border-radius: 16px;#}
+{#            box-shadow: 0 10px 30px rgba(0,0,0,0.1);#}
+{#            width: 100%;#}
+{#            max-width: 400px;#}
+{#        }#}
+{##}
+{#        .login-card h1 {#}
+{#            text-align: center;#}
+{#            margin-bottom: 1.5rem;#}
+{#            font-size: 1.75rem;#}
+{#            color: #333;#}
+{#        }#}
+{##}
+{#        .form-group {#}
+{#            margin-bottom: 1.2rem;#}
+{#        }#}
+{##}
+{#        label {#}
+{#            display: block;#}
+{#            margin-bottom: 0.5rem;#}
+{#            font-weight: 600;#}
+{#            color: #444;#}
+{#        }#}
+{##}
+{#        input[type="text"],#}
+{#        input[type="password"] {#}
+{#            width: 100%;#}
+{#            padding: 0.75rem;#}
+{#            border: 1px solid #ccc;#}
+{#            border-radius: 8px;#}
+{#            transition: border-color 0.3s;#}
+{#        }#}
+{##}
+{#        input[type="text"]:focus,#}
+{#        input[type="password"]:focus {#}
+{#            border-color: #667eea;#}
+{#            outline: none;#}
+{#        }#}
+{##}
+{#        .submit-btn {#}
+{#            width: 100%;#}
+{#            padding: 0.9rem;#}
+{#            background-color: #667eea;#}
+{#            border: none;#}
+{#            border-radius: 8px;#}
+{#            color: white;#}
+{#            font-weight: 600;#}
+{#            font-size: 1rem;#}
+{#            cursor: pointer;#}
+{#            transition: background-color 0.3s;#}
+{#        }#}
+{##}
+{#        .submit-btn:hover {#}
+{#            background-color: #5a67d8;#}
+{#        }#}
+{##}
+{#        .error-message {#}
+{#            color: #e53e3e;#}
+{#            text-align: center;#}
+{#            margin-top: 1rem;#}
+{#            font-size: 0.95rem;#}
+{#        }#}
+{##}
+{#        @media (max-width: 480px) {#}
+{#            .login-card {#}
+{#                padding: 2rem;#}
+{#            }#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <div class="login-card">#}
+{#        <h1>Login to Your Account</h1>#}
+{#        <form method="post">#}
+{#            {% csrf_token %}#}
+{#            <div class="form-group">#}
+{#                <label for="id_username">Username</label>#}
+{#                <input type="text" id="id_username" name="username" required>#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <label for="id_password">Password</label>#}
+{#                <input type="password" id="id_password" name="password" required>#}
+{#            </div>#}
+{#            <button type="submit" class="submit-btn">Login</button>#}
+{#        </form>#}
+{#        {% if inv %}#}
+{#            <p class="error-message">{{ inv }}</p>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e6e9ff, #d9d4f5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-card h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #667eea;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #5a67d8;
+        }
+
+        .back-home-btn {
+            margin-top: 1rem;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .back-home-btn:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h1>Login to Your Account</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" id="id_username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" id="id_password" name="password" required>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        {% if inv %}
+            <p class="error-message">{{ inv }}</p>
+        {% endif %}
+
+        <a href="{% url 'index' %}" class="back-home-btn">← Back to Home</a>
+        <p style="padding-top: 4px;"><a href="{% url 'forgot_password_request' %}">Forgot Password?</a></p>
+    </div>
+</body>
+</html>

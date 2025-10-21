@@ -1,0 +1,59 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#<section id="c" >#}
+{#{% block base %}#}
+{#<h2>Order Successful</h2>#}
+{#<p>Your order has been placed successfully. Order ID: {{ order_id }}</p>#}
+{#<p>Total Amount: ₹{{ total }}</p>#}
+{#{% endblock %}#}
+{#</section>#}
+
+
+{% extends 'temp/patient_home.html' %}
+
+{% block base %}
+<section id="c">
+<section id="order-success" style="
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #343a40;
+  text-align: center;
+">
+  <div style="
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    max-width: 480px;
+    width: 100%;
+  ">
+    <h1 style="color: #28a745; margin-bottom: 24px; font-weight: 700;">Order Successful!</h1>
+    <p style="font-size: 1.2rem; margin-bottom: 12px;">Thank you for your purchase.</p>
+    <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 8px;">
+      Order ID: <span style="color: #007bff;">{{ order_id }}</span>
+    </p>
+    <p style="font-weight: 600; font-size: 1.1rem;">
+      Total Amount: <span style="color: #007bff;">₹{{ total }}</span>
+    </p>
+    <a href="/temp/patient_home/" style="
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 28px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+      Return to Home
+    </a>
+  </div>
+</section>
+</section>
+{% endblock %}

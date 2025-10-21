@@ -1,0 +1,78 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{#  <div class="card">#}
+{#    <h1>View Prescription</h1>#}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Doctor Name</th>#}
+{#          <th>Patient ID</th>#}
+{#          <th>Prescription</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in obj %}#}
+{#        <tr>#}
+{#          <td data-label="Doctor Name">{{ i.doctor.doc_name }}</td>#}
+{#{% if i.prescription %}#}
+{#    <td><a href="{{ i.prescription.url }}">Download</a></td>#}
+{#{% else %}#}
+{#  No File Uploaded#}
+{#{% endif %}#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="3" style="text-align:center; color:#555;">No prescriptions found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px;">
+  <div class="card">
+    <h1>View Prescription</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Doctor Name</th>
+          <th>DATE</th>
+          <th>TIME</th>
+          <th>Prescription</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in obj %}
+        <tr>
+          <td data-label="Doctor Name">{{ i.doctor.doc_name }}</td>
+          <td data-label="DATE">{{ i.date }}</td>
+          <td data-label="TIME">{{ i.time }}</td>
+          {% if i.prescription %}
+            <td data-label="Prescription">
+                <a href="{% url 'download_prescription' i.pres_id %}" class="btn btn-success">
+                    Download
+                </a>
+            </td>
+
+          {% else %}
+            <td data-label="Prescription">No File Uploaded</td>
+          {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2" style="text-align:center; color:#555;">No prescriptions found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,268 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<h2>Your Cart</h2>#}
+{##}
+{#{% if cart_items %}#}
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Product</th>#}
+{#                <th>Price</th>#}
+{#                <th>Quantity</th>#}
+{#                <th>Total</th>#}
+{#                <th>Actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for item in cart_items %}#}
+{#            <tr>#}
+{#                <td>{{ item.product.name }}</td>#}
+{#                <td>₹{{ item.product.price }}</td>#}
+{#                <td>{{ item.quantity }}</td>#}
+{#                <td>₹{{ item.get_total_price }}</td>#}
+{#                <td>#}
+{#                    <form method="post" action="{% url 'update_cart' %}">#}
+{#                        {% csrf_token %}#}
+{#                        <input type="hidden" name="product_id" value="{{ item.product.id }}">#}
+{#                        <button type="submit" name="action" value="add" class="btn btn-info">+</button>#}
+{#                        <button type="submit" name="action" value="decrease" class="btn btn-warning">-</button>#}
+{#                        <button type="submit" name="action" value="remove" class="btn btn-danger">Remove</button>#}
+{#                    </form>#}
+{#                </td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{##}
+{#    <h4>Total: ₹{{ total }}</h4>#}
+{##}
+{#    {% if razorpay_order_id %}#}
+{#    <form action="{% url 'complete_payment' %}" method="POST">#}
+{#        {% csrf_token %}#}
+{#        <script#}
+{#            src="https://checkout.razorpay.com/v1/checkout.js"#}
+{#            data-key="{{ razorpay_key_id }}"#}
+{#            data-amount="{{ amount|floatformat:0 }}"#}
+{#            data-currency="INR"#}
+{#            data-order_id="{{ razorpay_order_id }}"#}
+{#            data-buttontext="Pay Now"#}
+{#            data-name="Medigo"#}
+{#            data-description="Order Payment"#}
+{#            data-image="https://yourdomain.com/static/logo.png"#}
+{#            data-prefill.name="{{ request.user.username }}"#}
+{#            data-prefill.email="{{ request.user.email }}"#}
+{#            data-theme.color="#F37254">#}
+{#        </script>#}
+{#    </form>#}
+{#    {% endif %}#}
+{#{% else %}#}
+{#    <p>Your cart is empty!</p>#}
+{#{% endif %}#}
+{#    </section>#}
+{#{% endblock %}#}
+{##}
+
+
+
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<section id="c" style="#}
+{#  background-color: white;#}
+{#  min-height: 100vh;#}
+{#  width: 100vw;#}
+{#  padding: 40px 20px;#}
+{#  box-sizing: border-box;#}
+{#  display: flex;#}
+{#  flex-direction: column;#}
+{#  align-items: center;#}
+{#  font-family: Arial, sans-serif;#}
+{#  padding-top: 100px;#}
+{#">#}
+{#  <div style="max-width: 900px; width: 100%;">#}
+{#    <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Your Cart</h2>#}
+{##}
+{#    {% if cart_items %}#}
+{#    <div style="overflow-x: auto;">#}
+{#      <table style="width: 100%; border-collapse: collapse; min-width: 600px;">#}
+{#        <thead>#}
+{#          <tr style="background-color: #007bff; color: white;">#}
+{#            <th style="padding: 12px; text-align: left;">Product</th>#}
+{#            <th style="padding: 12px; text-align: right;">Price</th>#}
+{#            <th style="padding: 12px; text-align: center; width: 150px;">Quantity</th>#}
+{#            <th style="padding: 12px; text-align: right;">Total</th>#}
+{#            <th style="padding: 12px; text-align: center; width: 220px;">Actions</th>#}
+{#          </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#          {% for item in cart_items %}#}
+{#          <tr style="border-bottom: 1px solid #ddd;">#}
+{#            <td style="padding: 12px; color: #555;">{{ item.product.name }}</td>#}
+{#            <td style="padding: 12px; text-align: right; color: #555;">₹{{ item.product.price }}</td>#}
+{#            <td style="padding: 12px; text-align: center;">#}
+{#              <form method="post" action="{% url 'update_cart' %}#c" style="display: flex; justify-content: center; gap: 5px; align-items: center; margin: 0;">#}
+{#                {% csrf_token %}#}
+{#                <input type="hidden" name="product_id" value="{{ item.product.id }}">#}
+{#                <button type="submit" name="action" value="decrease" style="padding: 5px 10px; background: #f0ad4e; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;" aria-label="Decrease quantity">-</button>#}
+{#                <span style="min-width: 30px; display: inline-block; text-align: center; font-weight: 600; font-size: 16px;">{{ item.quantity }}</span>#}
+{#                <button type="submit" name="action" value="add" style="padding: 5px 10px; background: #5cb85c; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;" aria-label="Increase quantity">+</button>#}
+{#              </form>#}
+{#            </td>#}
+{#            <td style="padding: 12px; text-align: right; font-weight: 600; color: #007bff;">₹{{ item.get_total_price }}</td>#}
+{#            <td style="padding: 12px; text-align: center;">#}
+{#              <form method="post" action="{% url 'update_cart' %}#c" style="margin: 0;">#}
+{#                {% csrf_token %}#}
+{#                <input type="hidden" name="product_id" value="{{ item.product.id }}">#}
+{#                <button type="submit" name="action" value="remove" style="padding: 6px 14px; background: #d9534f; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;">Remove</button>#}
+{#              </form>#}
+{#            </td>#}
+{#          </tr>#}
+{#          {% endfor %}#}
+{#        </tbody>#}
+{#      </table>#}
+{#    </div>#}
+{##}
+{#    <div style="text-align: right; margin-top: 20px; font-size: 1.25rem; font-weight: 700; color: #007bff;">#}
+{#      Total: ₹{{ total }}#}
+{#    </div>#}
+{##}
+{#    {% if razorpay_order_id %}#}
+{#    <div style="text-align: center; margin-top: 30px;">#}
+{#      <form action="{% url 'complete_payment' %}#c" method="POST">#}
+{#        {% csrf_token %}#}
+{#        <script#}
+{#          src="https://checkout.razorpay.com/v1/checkout.js"#}
+{#          data-key="{{ razorpay_key_id }}"#}
+{#          data-amount="{{ amount|floatformat:0 }}"#}
+{#          data-currency="INR"#}
+{#          data-order_id="{{ razorpay_order_id }}"#}
+{#          data-buttontext="Pay Now"#}
+{#          data-name="Medigo"#}
+{#          data-description="Order Payment"#}
+{#          data-image="https://yourdomain.com/static/logo.png"#}
+{#          data-prefill.name="{{ request.user.username }}"#}
+{#          data-prefill.email="{{ request.user.email }}"#}
+{#          data-theme.color="#007bff">#}
+{#        </script>#}
+{#      </form>#}
+{#    </div>#}
+{#    {% endif %}#}
+{##}
+{#    {% else %}#}
+{#    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-top: 50px;">Your cart is empty!</p>#}
+{#    {% endif %}#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/patient_home.html' %}
+
+{% block base %}
+<section id="c" style="background-color:#fff; min-height:100vh; padding:100px 20px; font-family:Arial, sans-serif;">
+  <div style="max-width:900px; margin:0 auto;">
+
+    <h2 style="text-align:center; margin-bottom:30px; color:#333;">Your Cart</h2>
+
+    {% if cart_items %}
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; min-width:600px;">
+          <thead>
+            <tr style="background:#007bff; color:#fff;">
+              <th style="padding:12px; text-align:left;">Product</th>
+              <th style="padding:12px; text-align:right;">Price</th>
+              <th style="padding:12px; text-align:center; width:150px;">Quantity</th>
+              <th style="padding:12px; text-align:right;">Total</th>
+              <th style="padding:12px; text-align:center; width:220px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_items %}
+            <tr style="border-bottom:1px solid #ddd;">
+              <td style="padding:12px; color:#555;">{{ item.product.name }}</td>
+              <td style="padding:12px; text-align:right; color:#555;">₹{{ item.product.price }}</td>
+              <td style="padding:12px; text-align:center;">
+                <form method="post" action="{% url 'update_cart' %}#c" style="display:flex; justify-content:center; align-items:center; gap:5px; margin:0;">
+{#                  {% csrf_token %}#}
+{#                  <input type="hidden" name="product_id" value="{{ item.product.id }}">#}
+{#                  <button type="submit" name="action" value="decrease">–</button>#}
+{#                  <span style="min-width:30px; display:inline-block; text-align:center;">{{ item.quantity }}</span>#}
+{#                  <button type="submit" name="action" value="add">+</button>#}
+                     {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                    <button type="submit" name="action" value="decrease" style="padding: 5px 10px; background: #f0ad4e; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;" aria-label="Decrease quantity">-</button>
+                    <span style="min-width: 30px; display: inline-block; text-align: center; font-weight: 600; font-size: 16px;">{{ item.quantity }}</span>
+                    <button type="submit" name="action" value="add" style="padding: 5px 10px; background: #5cb85c; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;" aria-label="Increase quantity">+</button>
+                </form>
+              </td>
+              <td style="padding:12px; text-align:right; font-weight:600; color:#007bff;">₹{{ item.get_total_price }}</td>
+              <td style="padding:12px; text-align:center;">
+                <form method="post" action="{% url 'update_cart' %}#c" style="margin:0;">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ item.product.id }}">
+{#                  <button type="submit" name="action" value="remove">Remove</button>#}
+                    <button type="submit" name="action" value="remove" style="padding: 6px 14px; background: #d9534f; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold;">Remove</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="text-align:right; margin-top:20px; font-size:1.25rem; font-weight:700; color:#007bff;">
+        Total: ₹{{ total }}
+      </div>
+
+      {% if razorpay_order_id %}
+      <div style="text-align:center; margin-top:30px;">
+        <form action="{% url 'complete_payment' %}#c" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% if error %}
+            <div style="margin-bottom:10px; color:#d9534f; font-weight:600;">{{ error }}</div>
+          {% endif %}
+
+          <div style="margin-bottom:15px;">
+            <label for="prescription_image" style="display:block; margin-bottom:5px; font-weight:600;">
+              Upload Prescription (JPEG/PNG, max 2 MB):
+            </label>
+            <input
+              id="prescription_image"
+              name="prescription_image"
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              required
+              style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"
+            />
+          </div>
+
+          <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key_id }}"
+            data-amount="{{ amount|floatformat:0 }}"
+            data-currency="INR"
+            data-order_id="{{ razorpay_order_id }}"
+            data-buttontext="Pay Now"
+            data-name="Medigo"
+            data-description="Order Payment"
+            data-image="https://yourdomain.com/static/logo.png"
+            data-prefill.name="{{ request.user.username }}"
+            data-prefill.email="{{ request.user.email }}"
+            data-theme.color="#007bff">
+          </script>
+        </form>
+      </div>
+      {% endif %}
+
+    {% else %}
+      <p style="text-align:center; font-size:1.2rem; color:#666; margin-top:50px;">
+        Your cart is empty!
+      </p>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

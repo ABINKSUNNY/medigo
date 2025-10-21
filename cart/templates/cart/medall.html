@@ -1,0 +1,255 @@
+{##}
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<style>#}
+{#  /* Card styling identical to view_products */#}
+{#  #c {#}
+{#    background-color: white;#}
+{#    min-height: 100vh;#}
+{#    padding: 40px 0;#}
+{#    width: 100%;#}
+{#  }#}
+{#  .product-card {#}
+{#    border: 1px solid #ddd;#}
+{#    border-radius: 6px;#}
+{#    margin-bottom: 30px;#}
+{#    box-shadow: 0 2px 5px rgba(0,0,0,0.1);#}
+{#    display: flex;#}
+{#    flex-direction: column;#}
+{#    height: 100%;#}
+{#    background: white;#}
+{#    transition: box-shadow 0.3s ease;#}
+{#  }#}
+{#  .product-card:hover {#}
+{#    box-shadow: 0 4px 12px rgba(0,0,0,0.15);#}
+{#  }#}
+{#  .product-image-container {#}
+{#    width: 100%;#}
+{#    height: 180px;#}
+{#    overflow: hidden;#}
+{#    border-top-left-radius: 6px;#}
+{#    border-top-right-radius: 6px;#}
+{#    background-color: #f9f9f9;#}
+{#    display: flex;#}
+{#    justify-content: center;#}
+{#    align-items: center;#}
+{#  }#}
+{#  .product-image-container img {#}
+{#    max-width: 100%;#}
+{#    max-height: 100%;#}
+{#    object-fit: contain;#}
+{#    object-position: center;#}
+{#  }#}
+{#  .product-info {#}
+{#    padding: 15px;#}
+{#    flex-grow: 1;#}
+{#    display: flex;#}
+{#    flex-direction: column;#}
+{#  }#}
+{#  .product-info h4 {#}
+{#    margin-top: 0;#}
+{#  }#}
+{#  .product-info p.description {#}
+{#    flex-grow: 1;#}
+{#    color: #555;#}
+{#    margin-bottom: 10px;#}
+{#  }#}
+{#  .product-info p.price {#}
+{#    font-weight: bold;#}
+{#    color: #007bff;#}
+{#    margin-bottom: 10px;#}
+{#  }#}
+{#  .btn-add {#}
+{#    margin-top: auto;#}
+{#  }#}
+{#</style>#}
+{##}
+{#<section id="c" class="container">#}
+{#  <h2 class="text-center mb-4">Available Medicines</h2>#}
+{#  <div class="row">#}
+{#    {% for product in products %}#}
+{#    <div class="col-sm-6 col-md-4 d-flex">#}
+{#      <div class="product-card">#}
+{#        {% if product.image %}#}
+{#        <div class="product-image-container">#}
+{#          <img src="{{ product.image.url }}" alt="{{ product.name }}">#}
+{#        </div>#}
+{#        {% endif %}#}
+{#        <div class="product-info">#}
+{#          <h4>{{ product.name }}</h4>#}
+{#          <p class="description">{{ product.description|truncatechars:80 }}</p>#}
+{#          <p class="price">₹{{ product.price }}</p>#}
+{#          <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary btn-add">Add to Cart</a>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#    {% empty %}#}
+{#    <p>No medicines available.</p>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+
+
+{% extends 'temp/patient_home.html' %}
+
+{% block base %}
+<style>
+  /* Container */
+  #c {
+    background-color: white;
+    min-height: 100vh;
+    padding: 40px 0;
+    width: 100%;
+  }
+
+  /* Search bar */
+  #searchBar {
+    max-width: 400px;
+    margin: 0 auto 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 30px;
+    padding-left: 20px;
+    height: 45px;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+    display: block;
+  }
+  #searchBar:focus {
+    outline: none;
+    box-shadow: 0 0 8px #007bff;
+  }
+
+  /* Card styling */
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+  }
+
+  /* Image container */
+  .product-image-container {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  /* Info section */
+  .product-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-info h4 {
+    margin-top: 0;
+  }
+
+  .product-info p.description {
+    flex-grow: 1;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .product-info p.price {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+
+  /* Buttons */
+  .btn-add {
+    margin-top: auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .btn-add:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .btn-go-cart {
+    margin-top: 10px;
+    background-color: #20c997; /* Teal */
+    border-color: #20c997;
+    color: white;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-go-cart:hover {
+    background-color: #17a2b8; /* Slightly darker teal */
+    border-color: #17a2b8;
+    color: white;
+  }
+</style>
+
+<section id="c" class="container">
+  <h2 class="text-center mb-4">Available Medicines</h2>
+
+  <input type="text" id="searchBar" placeholder="Search medicines..." />
+
+  <div class="row" id="productList">
+    {% for product in products %}
+    <div class="col-sm-6 col-md-4 d-flex product-item">
+      <div class="product-card">
+        {% if product.image %}
+        <div class="product-image-container">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        {% endif %}
+        <div class="product-info">
+          <h4 class="product-name">{{ product.name }}</h4>
+          <p class="description">{{ product.description|truncatechars:80 }}</p>
+          <p class="price">₹{{ product.price }}</p>
+          <a href="{% url 'add_to_cart' product.id %}#c" class="btn btn-primary btn-add">Add to Cart</a>
+          <a href="{% url 'cart' %}#c" class="btn btn-go-cart btn-block">Go to Cart</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No medicines available.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  document.getElementById("searchBar").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const items = document.querySelectorAll(".product-item");
+
+    items.forEach(item => {
+      const name = item.querySelector(".product-name").textContent.toLowerCase();
+      item.style.display = name.includes(query) ? "flex" : "none";
+    });
+  });
+</script>
+{% endblock %}

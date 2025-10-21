@@ -1,0 +1,188 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c">#}
+{#  <div class="card">#}
+{#    <h1>PHARMACIES</h1>#}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Slno</th>#}
+{#          <th>Pharmacy Name</th>#}
+{#          <th>Place</th>#}
+{#          <th>Address</th>#}
+{#          <th>Contact</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in obj %}#}
+{#        <tr>#}
+{#          <td data-label="Slno">{{ forloop.counter }}</td>#}
+{#          <td data-label="Pharmacy Name">{{ i.name }}</td>#}
+{#          <td data-label="Place">{{ i.place }}</td>#}
+{#          <td data-label="Address">{{ i.address }}</td>#}
+{#          <td data-label="Contact">{{ i.contact }}</td>#}
+{#          <td data-label="Action">#}
+{#            <a href="{% url 'view_products' idd=i.pha_id %}"#}
+{#               style="#}
+{#                 display: inline-block;#}
+{#                 padding: 6px 30px;#}
+{#                 background-color: #28a745;#}
+{#                 color: white;#}
+{#                 border-radius: 6px;#}
+{#                 text-decoration: none;#}
+{#                 font-weight: 600;#}
+{#                 font-size: 14px;#}
+{#                 transition: background-color 0.3s ease;#}
+{#               "#}
+{#               onmouseover="this.style.backgroundColor='#218838';"#}
+{#               onmouseout="this.style.backgroundColor='#28a745';"#}
+{#            >#}
+{#              View#}
+{#            </a>#}
+{#          </td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="6" style="text-align:center; color:#555;">No pharmacies found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+{#******************#}
+
+
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+<style>
+  #c {
+    padding: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead tr {
+    background-color: #0077cc;
+    color: white;
+  }
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  tbody tr:hover {
+    background-color: #f1f9ff;
+  }
+  /* Button styling */
+  .btn-view {
+    display: inline-block;
+    padding: 6px 30px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-view:hover {
+    background-color: #218838;
+  }
+  /* Search input */
+  #searchPlace {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+  }
+  #searchPlace:focus {
+    box-shadow: 0 0 8px #007bff;
+    border-color: #007bff;
+  }
+</style>
+
+<section id="c" style="padding-top: 100px;">
+  <div class="card">
+    <h1>PHARMACIES</h1>
+
+    <input type="text" id="searchPlace" placeholder="Search to see if one-day delivery is available">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Slno</th>
+          <th>Pharmacy Name</th>
+          <th>Place</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="pharmacyTableBody">
+        {% for i in obj %}
+        <tr style="display:none;">
+          <td data-label="Slno">{{ forloop.counter }}</td>
+          <td data-label="Pharmacy Name">{{ i.name }}</td>
+          <td data-label="Place">{{ i.place }}</td>
+          <td data-label="Address">{{ i.address }}</td>
+          <td data-label="Contact">{{ i.contact }}</td>
+          <td data-label="Action">
+            <a href="{% url 'view_products' idd=i.pha_id %}#c" class="btn-view">View</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" style="text-align:center; color:#555;">No pharmacies found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  const searchInput = document.getElementById('searchPlace');
+  const tableBody = document.getElementById('pharmacyTableBody');
+
+  searchInput.addEventListener('input', function() {
+    const filter = this.value.toLowerCase().trim();
+    const rows = tableBody.querySelectorAll('tr');
+
+    if (filter === "") {
+      // Hide all rows if search is empty
+      rows.forEach(row => row.style.display = 'none');
+      return;
+    }
+
+    rows.forEach(row => {
+      const placeCell = row.querySelector('td[data-label="Place"]');
+      if (placeCell) {
+        const placeText = placeCell.textContent.toLowerCase();
+        row.style.display = placeText.includes(filter) ? '' : 'none';
+      }
+    });
+  });
+</script>
+{% endblock %}

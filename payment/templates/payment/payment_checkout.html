@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Pay Now Button Styling */
+        .razorpay-payment-button {
+            background-color: #3399cc;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .razorpay-payment-button:hover {
+            background-color: #2b89b3;
+        }
+
+        .razorpay-payment-button:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <form action="{% url 'payment_success' %}" method="POST">
+        {% csrf_token %}
+        <script
+            id="razorpayBtn"
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key_id }}"
+            data-amount="{{ payment.amount }}"
+            data-currency="INR"
+            data-order_id="{{ order.id }}"
+            data-buttontext="Pay Now"
+            data-name="Demo Payment"
+            data-description="Test Transaction"
+            data-prefill.name="{{ payment.name }}"
+            data-theme.color="#3399cc"
+            class="razorpay-payment-button"
+        ></script>
+    </form>
+</div>
+
+</body>
+</html>

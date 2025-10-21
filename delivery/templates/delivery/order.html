@@ -1,0 +1,153 @@
+{#{% extends 'temp/pharmacy_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#<center>#}
+{#   <h1 align="center">ORDERS</h1>#}
+{#    <br>#}
+{##}
+{#     <table align="center" border="1">#}
+{#       <tr>#}
+{#         <td>NAME</td>#}
+{#         <td>CONTACT</td>#}
+{#         <td>ADDRESS</td>#}
+{#         <td>ORDER ID</td>#}
+{#         <td>PRODUCT ID</td>#}
+{#         <td>QUANTITY</td>#}
+{#         <td>PAYMENT ID</td>#}
+{#       </tr>#}
+{##}
+{# {% for i in obj %}#}
+{##}
+{#       <tr>#}
+{#         <td>{{ i.patient.name }}</td>#}
+{#         <td>{{ i.patient.phno }}</td>#}
+{#         <td>{{ i.patient.address }}</td>#}
+{#         <td>{{ i.order_id }}</td>#}
+{#         <td>{{ i.product_id }}</td>#}
+{#         <td>{{ i.quantity }}</td>#}
+{#         <td>{{ i.payment_id }}</td>#}
+{##}
+{#      <td> <a href="{% url 'assign_status' i.pu_id %}">Assign Delivery Agent</a></td>#}
+{#       </tr>#}
+{##}
+{#         {% endfor %}#}
+{##}
+{#     </table>#}
+{#  </center>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</section>#}
+{##}
+{#{% extends 'temp/pharmacy_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{#  <div class="card">#}
+{#    <h1>Orders</h1>#}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Name</th>#}
+{#          <th>Contact</th>#}
+{#          <th>Address</th>#}
+{#          <th>Order ID</th>#}
+{#          <th>Product ID</th>#}
+{#          <th>Quantity</th>#}
+{#          <th>Payment ID</th>#}
+{#          <th>Prescription</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in obj %}#}
+{#        <tr>#}
+{#          <td data-label="Name">{{ i.patient.name }}</td>#}
+{#          <td data-label="Contact">{{ i.patient.phno }}</td>#}
+{#          <td data-label="Address">{{ i.patient.address }}</td>#}
+{#          <td data-label="Order ID">{{ i.order_id }}</td>#}
+{#          <td data-label="Product ID">{{ i.product_id }}</td>#}
+{#          <td data-label="Quantity">{{ i.quantity }}</td>#}
+{#          <td data-label="Payment ID">{{ i.payment_id }}</td>#}
+{#          <td data-label="Prescription">{{ i.prescription_image }}</td>#}
+{#          <td data-label="Action">#}
+{#            <a href="{% url 'assign_status' i.pu_id %}#c" class="btn btn-success">Assign Delivery</a>#}
+{#          </td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="8" style="text-align:center; color:#555;">No orders found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+{% extends 'temp/pharmacy_home.html' %}
+{% block base %}
+<section id="c" style="padding-top:100px;">
+  <div class="card">
+    <h1>Orders</h1>
+    <table style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Name</th><th>Contact</th><th>Address</th>
+          <th>Order ID</th><th>Product ID</th><th>Quantity</th>
+          <th>Payment ID</th><th>Prescription</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in obj %}
+        <tr>
+          <td data-label="Name">{{ i.patient.name }}</td>
+          <td data-label="Contact">{{ i.patient.phno }}</td>
+          <td data-label="Address">{{ i.patient.address }}</td>
+          <td data-label="Order ID">{{ i.order_id }}</td>
+          <td data-label="Product ID">{{ i.product_id }}</td>
+          <td data-label="Quantity">{{ i.quantity }}</td>
+          <td data-label="Payment ID">{{ i.payment_id }}</td>
+          <td data-label="Prescription">
+            {% if i.prescription_image %}
+              <a href="#presc-{{ forloop.counter }}" style="text-decoration:none;">
+                <img src="{{ i.prescription_image.url }}"
+                     alt="Prescription thumbnail"
+                     style="max-width:80px; cursor:zoom-in; border:1px solid #ccc;" />
+              </a>
+              <a href="#_" id="presc-{{ forloop.counter }}"
+                 style="
+                   display:none;
+                   position:fixed; top:0; left:0;
+                   width:100%; height:100%;
+                   background:rgba(0,0,0,0.8);
+                   align-items:center; justify-content:center;
+                   z-index:999;">
+                <img src="{{ i.prescription_image.url }}"
+                     alt="Prescription full size"
+                     style="max-width:90%; max-height:90%; box-shadow:0 0 8px #fff;" />
+              </a>
+              <style>
+                #presc-{{ forloop.counter }}:target {
+                  display:flex !important;
+                }
+              </style>
+            {% else %}
+              No prescription
+            {% endif %}
+          </td>
+          <td data-label="Action">
+            <a href="{% url 'assign_status' i.pu_id %}#c" class="btn btn-success">Assign Delivery</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="9" style="text-align:center; color:#555;">No orders found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

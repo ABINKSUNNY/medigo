@@ -1,0 +1,42 @@
+{% extends 'temp/hospital_home.html' %}
+{% block base %}
+<section id="c" style="padding-top:100px ">
+  <div class="card" style="max-width: 1100px; margin: auto; padding: 20px;">
+    <h1>Payments</h1>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+
+        <tr>
+          <th>SlNo</th>
+          <th>Appointment ID</th>
+          <th>Patient</th>
+          <th>Contact</th>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+          <th>Payment Time</th>
+          <th>Type</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in cd %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.a_id }}</td>
+                <td>{{ i.patient.name }}</td>
+                <td>{{ i.patient.phno }}</td>
+                <td>{{ i.payment_id }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.payment_date }}</td>
+                <td>{{ i.payment_time }}</td>
+                <td>{{ i.type }}</td>
+
+              </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

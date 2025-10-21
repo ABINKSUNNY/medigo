@@ -1,0 +1,175 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" style="padding-top: 100px;" >#}
+{#<body>#}
+{#{% csrf_token %}#}
+{#<center>#}
+{#<h1 align="center">VIEW REPLY</h1>#}
+{#<br>#}
+{##}
+{# <table align="center" border="1">#}
+{# <tr>#}
+{#  <td>SlNo</td>#}
+{#    <td>COMPLAINT</td>#}
+{#    <td>REPLY</td>#}
+{#    <td>DATE</td>#}
+{#     <td>TIME</td>#}
+{# </tr>#}
+{##}
+{#{% for i in cb %}#}
+{#    <tr>#}
+{#        <td></td>#}
+{#        <td>{{ i.complaint }}</td>#}
+{#        <td>{{ i.reply }}</td>#}
+{#        <td>{{ i.date }}</td>#}
+{#        <td>{{ i.time }}</td>#}
+{##}
+{##}
+{#       </tr>#}
+{#     {% endfor %}#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+
+{##}
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px; ">#}
+{#  <center>#}
+{#    <h1>VIEW REPLY</h1>#}
+{#    <br>#}
+{##}
+{#    <table border="1" style="margin: 0 auto; border-collapse: collapse; min-width: 1100px; ">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>SlNo</th>#}
+{#          <th>COMPLAINT</th>#}
+{#          <th>REPLY</th>#}
+{#          <th>DATE</th>#}
+{#          <th>TIME</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in cb %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.complaint }}</td>#}
+{#          <td>{{ i.reply }}</td>#}
+{#          <td>{{ i.date }}</td>#}
+{#          <td>{{ i.time }}</td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="5" style="text-align: center;">No replies found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </center>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+<style>
+  body {
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+  }
+
+  section#c {
+    padding-top: 100px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .reply-view-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 1100px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .reply-view-card h1 {
+    text-align: center;
+    color: #1877f2;
+    margin-bottom: 30px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid #d0d0d0;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  th {
+    background-color: #1877f2;
+    color: white;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:hover {
+    background-color: #eef4ff;
+  }
+
+  @media (max-width: 768px) {
+    .reply-view-card {
+      padding: 20px;
+    }
+
+    th, td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+</style>
+
+<section id="c">
+  <div class="reply-view-card">
+    <h1>View Reply</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Sl.No</th>
+          <th>Complaint</th>
+          <th>Reply</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in cb %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.complaint }}</td>
+          <td>{{ i.reply }}</td>
+          <td>{{ i.date }}</td>
+          <td>{{ i.time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" style="text-align: center;">No replies found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

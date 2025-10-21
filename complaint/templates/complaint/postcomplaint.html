@@ -1,0 +1,185 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base%}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#<center>#}
+{# <h1 align="center">Complaints</h1>#}
+{# <form method="post">#}
+{#    {% csrf_token %}#}
+{#  <table align="center">#}
+{##}
+{#      <tr>#}
+{#         <td>Complaint:</td>#}
+{#         <td><input type="text" name="complaint" value="" ></td>#}
+{#      </tr>#}
+{##}
+{##}
+{##}
+{#    <td><input type="submit"value="post"></td>#}
+{#  </table>#}
+{# </form>#}
+{#</center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+{##}
+{#{% extends 'temp/patient_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c" class="py-5" style="padding-top: 100px;">#}
+{#  <div class="container" style="max-width: 480px;">#}
+{#    <h1 class="text-center mb-4 fw-bold">Submit Your Complaint</h1>#}
+{#    <form method="post" novalidate>#}
+{#      {% csrf_token %}#}
+{#      <div class="mb-3">#}
+{#        <label for="complaint" class="form-label">Complaint</label>#}
+{#        <textarea#}
+{#          class="form-control"#}
+{#          id="complaint"#}
+{#          name="complaint"#}
+{#          rows="4"#}
+{#          placeholder="Type your complaint here..."#}
+{#          required#}
+{#          autocomplete="off"#}
+{#        ></textarea>#}
+{#        <div class="invalid-feedback">#}
+{#          Please enter your complaint.#}
+{#        </div>#}
+{#      </div>#}
+{#      <button type="submit" class="btn btn-primary w-100 fw-semibold">Post Complaint</button>#}
+{#    </form>#}
+{#  </div>#}
+{#</section>#}
+{##}
+{#<script>#}
+{#// Bootstrap form validation example (optional)#}
+{#(() => {#}
+{#  'use strict';#}
+{#  const form = document.querySelector('form');#}
+{#  form.addEventListener('submit', event => {#}
+{#    if (!form.checkValidity()) {#}
+{#      event.preventDefault();#}
+{#      event.stopPropagation();#}
+{#    }#}
+{#    form.classList.add('was-validated');#}
+{#  }, false);#}
+{#})();#}
+{#</script>#}
+{#{% endblock %}#}
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+<section id="c" class="py-5" style="padding-top: 30px;">
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f5fa;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f8ff;
+  }
+
+  .fb-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+  }
+
+  .fb-card h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1c1e21;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: #050505;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccd0d5;
+    background-color: #f5f6f7;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .form-control:focus {
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    background-color: white;
+  }
+
+  .btn-fb {
+    background-color: #1877f2;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+  }
+
+  .btn-fb:hover {
+    background-color: #166fe5;
+  }
+
+  .msg {
+    text-align: center;
+    color: green;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .error {
+    text-align: center;
+    color: red;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+</style>
+
+<div class="page-wrapper">
+  <div class="fb-card">
+    <h1>Submit Your Complaint</h1>
+
+    {% if msg %}
+      <div class="msg">{{ msg }}</div>
+    {% elif error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="complaint" class="form-label">Complaint</label>
+        <textarea
+          class="form-control"
+          id="complaint"
+          name="complaint"
+          rows="4"
+          placeholder="What's troubling you?"
+          required
+          autocomplete="off"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-fb w-100">Post Complaint</button>
+    </form>
+  </div>
+</div>
+</section>
+{% endblock %}
+

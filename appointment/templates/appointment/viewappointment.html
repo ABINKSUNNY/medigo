@@ -1,0 +1,262 @@
+{#{% extends 'temp/hospital_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#  <label for="search">Search:</label>#}
+{#<input type="search" id="search" name="search">#}
+{#<center>#}
+{##}
+{# <h1 align="center">APPOINTMENTS</h1>#}
+{# <table align="center" border="1">#}
+{##}
+{# <tr>#}
+{#    <td>SlNo</td>#}
+{#    <td>PATIENT</td>#}
+{#    <td>AGE</td>#}
+{#    <td>GENDER</td>#}
+{#    <td>ADDRESS</td>#}
+{#    <td>CONTACT</td>#}
+{##}
+{#    <td>DATE</td>#}
+{#    <td>TIME</td>#}
+{# </tr>#}
+{#{% for i in cd %}#}
+{#    <tr>#}
+{#        <td></td>#}
+{#        <td>{{ i.patient.name }}</td>#}
+{#        <td>{{ i.patient.age}}</td>#}
+{#        <td>{{ i.patient.gender}}</td>#}
+{#        <td>{{ i.patient.address}}</td>#}
+{#        <td>{{ i.patient.phno }}</td>#}
+{#        <td>{{ i.date }}</td>#}
+{#        <td>{{ i.time }}</td>#}
+{##}
+{##}
+{#       </tr>#}
+{#     {% endfor %}#}
+{# </table></center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+
+************************************
+{##}
+{#{% extends 'temp/hospital_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c">#}
+{#  <body>#}
+{#    <center>#}
+{#      <h1>APPOINTMENTS</h1>#}
+{##}
+{#      <!-- Filter by Date -->#}
+{#      <form method="get" class="mb-3">#}
+{#        <label for="date">Filter by Date:</label>#}
+{#        <input type="date" id="date" name="date" value="{{ selected_date }}">#}
+{#        <button type="submit" class="btn btn-primary btn-sm">Filter</button>#}
+{#        {% if selected_date %}#}
+{#        <a href="{% url 'viewapp' %}" class="btn btn-secondary badge">Clear</a>#}
+{#        {% endif %}#}
+{#      </form>#}
+{##}
+{#      <table border="1" align="center">#}
+{#        <tr>#}
+{#          <th>SlNo</th>#}
+{#          <th>PATIENT</th>#}
+{#          <th>AGE</th>#}
+{#          <th>GENDER</th>#}
+{#          <th>ADDRESS</th>#}
+{#          <th>CONTACT</th>#}
+{#          <th>DATE</th>#}
+{#          <th>TIME</th>#}
+{#          <th>TYPE</th>#}
+{#          <th>STATUS</th>#}
+{#        </tr>#}
+{#        {% for i in cd %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.patient.name }}</td>#}
+{#          <td>{{ i.patient.age }}</td>#}
+{#          <td>{{ i.patient.gender }}</td>#}
+{#          <td>{{ i.patient.address }}</td>#}
+{#          <td>{{ i.patient.phno }}</td>#}
+{#          <td>{{ i.date }}</td>#}
+{#          <td>{{ i.time }}</td>#}
+{#          <td>{{ i.type }}</td>#}
+{#          <td>{{ i.status }}</td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr><td colspan="8" align="center">No appointments found for selected date.</td></tr>#}
+{#        {% endfor %}#}
+{#      </table>#}
+{#    </center>#}
+{#  </body>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+{#{% extends 'temp/hospital_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c">#}
+{#  <div class="card">#}
+{#    <h1>Appointments</h1>#}
+{##}
+{##}
+{##}
+{##}
+{#    <!-- Filter by Date -->#}
+{#    <form method="get">#}
+{#      <label for="date">Filter by Date:</label>#}
+{#      <input type="date" id="date" name="date" value="{{ selected_date }}">#}
+{#      <button type="submit">Filter</button>#}
+{#      {% if selected_date %}#}
+{#      <a href="{% url 'viewapp' %}" style="background:#6c757d;color:white;padding:6px 10px;border-radius:5px;text-decoration:none;">Clear</a>#}
+{#      {% endif %}#}
+{#    </form>#}
+{##}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>SlNo</th>#}
+{#          <th>Patient</th>#}
+{#          <th>Age</th>#}
+{#          <th>Gender</th>#}
+{#          <th>Address</th>#}
+{#          <th>Contact</th>#}
+{#          <th>Date</th>#}
+{#          <th>Time</th>#}
+{#          <th>Type</th>#}
+{#          <th>Status</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in cd %}#}
+{#        <tr>#}
+{#          <td data-label="SlNo">{{ forloop.counter }}</td>#}
+{#          <td data-label="Patient">{{ i.patient.name }}</td>#}
+{#          <td data-label="Age">{{ i.patient.age }}</td>#}
+{#          <td data-label="Gender">{{ i.patient.gender }}</td>#}
+{#          <td data-label="Address">{{ i.patient.address }}</td>#}
+{#          <td data-label="Contact">{{ i.patient.phno }}</td>#}
+{#          <td data-label="Date">{{ i.date }}</td>#}
+{#          <td data-label="Time">{{ i.time }}</td>#}
+{#          <td data-label="Type">{{ i.type }}</td>#}
+{#          <td data-label="Status">{{ i.status }}</td>#}
+{#          <td>#}
+{#  <form method="post" action="{% url 'cancel_apphos' i.a_id %}#c" style="display:inline;">#}
+{#    {% csrf_token %}#}
+{#    <button type="submit" class="btn-cancel" onclick="return confirm('Are you sure you want to cancel this appointment?');">#}
+{#      Cancel#}
+{#    </button>#}
+{#  </form>#}
+{#</td>#}
+{##}
+{##}
+{##}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="10" style="text-align:center;">No appointments found for selected date.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/hospital_home.html' %}
+
+{% block base %}
+<section id="c">
+  <style>
+    .btn-cancel {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      background-color: #c82333;
+    }
+
+    form button:focus {
+      outline: none;
+    }
+  </style>
+
+  <div class="card">
+    <h1>Appointments</h1>
+
+    <!-- Filter by Date -->
+    <form method="get" style="margin-bottom: 20px;">
+      <label for="date">Filter by Date:</label>
+      <input type="date" id="date" name="date" value="{{ selected_date }}">
+      <button type="submit">Filter</button>
+      {% if selected_date %}
+      <a href="{% url 'viewapp' %}" style="background:#6c757d;color:white;padding:6px 10px;border-radius:5px;text-decoration:none;">Clear</a>
+      {% endif %}
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SlNo</th>
+          <th>Patient</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in cd %}
+        <tr>
+          <td data-label="SlNo">{{ forloop.counter }}</td>
+          <td data-label="Patient">{{ i.patient.name }}</td>
+          <td data-label="Age">{{ i.patient.age }}</td>
+          <td data-label="Gender">{{ i.patient.gender }}</td>
+          <td data-label="Address">{{ i.patient.address }}</td>
+          <td data-label="Contact">{{ i.patient.phno }}</td>
+          <td data-label="Date">{{ i.date }}</td>
+          <td data-label="Time">{{ i.time }}</td>
+          <td data-label="Type">{{ i.type }}</td>
+          <td data-label="Status">{{ i.status|capfirst }}</td>
+          <td>
+            {% if i.status|lower == 'paid' or i.status|lower == 'payment pending' %}
+              <form method="post" action="{% url 'cancel_apphos' i.a_id %}#c" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-cancel" onclick="return confirm('Are you sure you want to cancel this appointment?');">
+                  Cancel
+                </button>
+              </form>
+            {% else %}
+              —
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="11" style="text-align:center;">No appointments found for selected date.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

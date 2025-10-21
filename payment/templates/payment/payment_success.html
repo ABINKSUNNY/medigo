@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Payment Success</title></head>
+<body>
+    <div style="text-align:center; padding: 50px;">
+        <h2>✅ Payment Successful!</h2>
+        <p>Name: {{ payment.name }}</p>
+        <p>Amount: ₹{{ payment.amount|floatformat:2 }}/100</p>
+        <p>Order ID: {{ payment.order_id }}</p>
+        <p>Payment ID: {{ payment.payment_id }}</p>
+    </div>
+</body>
+</html>

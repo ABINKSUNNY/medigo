@@ -1,0 +1,37 @@
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+    <section id="c" >
+ <body>
+  <center>
+   <h1 align="center">HOSPITALS</h1>
+    <br>
+
+     <table align="center" border="1">
+       <tr>
+         <td>Slno</td>
+         <td>HOSPITAL NAME</td>
+         <td>ADDRESS</td>
+         <td>CONTACT</td>
+         <td>EMAIL</td>
+         <td>SPECIALITY</td>
+{#         <td>DEPARTMENT</td>#}
+         <td></td>
+       </tr>
+{%  for i in ob %}
+       <tr>
+       <td></td>
+         <td>{{ i.hospitalname }}</td>
+         <td>{{ i.address }}</td>
+         <td>{{ i.contact }}</td>
+         <td>{{ i.email }}</td>
+         <td>{{ i.speciality }}</td>
+{#         <td>{{ i.department }}</td>#}
+
+       </tr>
+
+         {% endfor %}
+     </table>
+  </center>
+ </body>
+    </section>
+{% endblock %}

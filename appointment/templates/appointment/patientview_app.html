@@ -1,0 +1,267 @@
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{##}
+{#  <div class="card">#}
+{#    <h1>Your Appointments</h1>#}
+{#  <p style="color: red; padding-top: 10px; padding-bottom: 10px;">#}
+{#  <strong>Important!</strong> Patients who opted for an online appointment should be ready with the Zoom application at the respective time. The Zoom link will be provided 5 minutes before the appointment. Patients are advised to check the chat regularly.#}
+{#</p>#}
+{##}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Hospital</th>#}
+{#          <th>Doctor</th>#}
+{#          <th>Date</th>#}
+{#          <th>Time</th>#}
+{#          <th>Status</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for appointment in cb %}#}
+{#        <tr>#}
+{#          <td data-label="Hospital">{{ appointment.hospital.hospitalname }}</td>#}
+{#          <td data-label="Doctor">{{ appointment.doctor.doc_name }}</td>#}
+{#          <td data-label="Date">{{ appointment.date }}</td>#}
+{#          <td data-label="Time">{{ appointment.time }}</td>#}
+{#          <td data-label="Status">{{ appointment.status }}</td>#}
+{#          <td data-label="Action">#}
+{#            {% if appointment.status == 'Payment Pending' %}#}
+{#            <form method="post" action="{% url 'pay_now' appointment.a_id %}">#}
+{#              {% csrf_token %}#}
+{#              <input type="number" name="amount" min="1" placeholder="Enter amount (₹)" required>#}
+{#              <button type="submit">Pay Now</button>#}
+{#            </form>#}
+{#            {% else %}#}
+{#              {{ appointment.status|capfirst }}#}
+{#            {% endif %}#}
+{#              {% if appointment.status == 'Payment Pending' %}#}
+{#                <form method="post" action="{% url 'pay_now' appointment.a_id %}">#}
+{#                {% csrf_token %}#}
+{#                <div class="form-group">#}
+{#                 <label>Amount (₹)</label>#}
+{#                <input#}
+{#                    type="number"#}
+{#                    name="amount"#}
+{#                    value="{{ appointment.doctor.consultation_fee }}"#}
+{#                    readonly#}
+{#                    class="form-control"#}
+{#                >#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-primary">Pay Now</button>#}
+{#                </form>#}
+{#{% else %}#}
+{#  {{ appointment.status|capfirst }}#}
+{#{% endif %}#}
+{##}
+{#          </td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="6" style="text-align:center; color:#555;">No appointments found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</section>#}
+{#{% endblock %}#}
+
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<section id="c" style="padding-top: 100px;">#}
+{##}
+{#  <div class="card">#}
+{#    <h1>Your Appointments</h1>#}
+{#    <p style="color: red; padding-top: 10px; padding-bottom: 10px;">#}
+{#      <strong>Important!</strong> Patients who opted for an online appointment should be ready with the Zoom application at the respective time. The Zoom link will be provided 5 minutes before the appointment. Patients are advised to check the chat regularly.#}
+{#    </p>#}
+{##}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Hospital</th>#}
+{#          <th>Doctor</th>#}
+{#          <th>Date</th>#}
+{#          <th>Time</th>#}
+{#          <th>Status</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for appointment in cb %}#}
+{#        <tr>#}
+{#          <td data-label="Hospital">{{ appointment.hospital.hospitalname }}</td>#}
+{#          <td data-label="Doctor">{{ appointment.doctor.doc_name }}</td>#}
+{#          <td data-label="Date">{{ appointment.date }}</td>#}
+{#          <td data-label="Time">{{ appointment.time }}</td>#}
+{#          <td data-label="Status">{{ appointment.status|capfirst }}</td>#}
+{#          <td data-label="Action">#}
+{##}
+{#            {% if appointment.status == 'Payment Pending' %}#}
+{#              <form method="post" action="{% url 'pay_now' appointment.a_id %}">#}
+{#                {% csrf_token %}#}
+{#                <div class="form-group">#}
+{#                  <label>Amount (₹)</label>#}
+{#                  <input#}
+{#                    type="number"#}
+{#                    name="amount"#}
+{#                    value="{{ appointment.doctor.consultation_fee }}"#}
+{#                    readonly#}
+{#                    class="form-control"#}
+{#                  >#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-primary">Pay Now</button>#}
+{#              </form>#}
+{##}
+{#            {% elif appointment.status|lower == 'paid' %}#}
+{#              <form method="post" action="{% url 'cancel_apppat' appointment.a_id %}">#}
+{#                {% csrf_token %}#}
+{#                <button#}
+{#                  type="submit"#}
+{#                  class="btn btn-danger"#}
+{#                  onclick="return confirm('Are you sure you want to cancel this appointment?');"#}
+{#                >Cancel</button>#}
+{#              </form>#}
+{#                <button type="submit" class="btn btn-danger" style="background-color:red; border-color:red;">#}
+{#  Cancel#}
+{#</button>#}
+{##}
+{##}
+{#            {% else %}#}
+{#              {{ appointment.status|capfirst }}#}
+{#            {% endif %}#}
+{##}
+{#          </td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="6" style="text-align:center; color:#555;">No appointments found.</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#</section>#}
+{#{% endblock %}#}
+{##}
+
+
+{% extends 'temp/patient_home.html' %}
+
+{% block base %}
+<section id="c" style="padding-top: 100px;">
+  <style>
+  /* Scoped button styles inside appointment section */
+  section#c .btn-pay-now {
+    background-color: #0d5fff;
+    border: none;
+    color: #fff;
+    padding: 6px 6px;
+    min-width: 70px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  section#c .btn-pay-now:hover {
+    background-color: #0056b3;
+  }
+
+  section#c .btn-cancel {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    min-width: 70px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  section#c .btn-cancel:hover {
+    background-color: #c82333;
+  }
+
+  section#c .form-control[readonly] {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 6px;
+    border-radius: 4px;
+  }
+
+  section#c .form-group {
+    margin-bottom: 10px;
+  }
+</style>
+
+
+  <div class="card">
+    <h1>Your Appointments</h1>
+    <p style="color: red; padding-top: 10px; padding-bottom: 10px;">
+      <strong>Important!</strong> Patients who opted for an online appointment should be ready with the Zoom application at the respective time. The Zoom link will be provided 5 minutes before the appointment. Patients are advised to check the chat regularly.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Hospital</th>
+          <th>Doctor</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for appointment in cb %}
+        <tr>
+          <td data-label="Hospital">{{ appointment.hospital.hospitalname }}</td>
+          <td data-label="Doctor">{{ appointment.doctor.doc_name }}</td>
+          <td data-label="Date">{{ appointment.date }}</td>
+          <td data-label="Time">{{ appointment.time }}</td>
+          <td data-label="Status">{{ appointment.status|capfirst }}</td>
+          <td data-label="Action">
+            {% if appointment.status == 'Payment Pending' %}
+              <form method="post" action="{% url 'pay_now' appointment.a_id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label>Amount (₹)</label>
+                  <input
+                    type="number"
+                    name="amount"
+                    value="{{ appointment.doctor.consultation_fee }}"
+                    readonly
+                    class="form-control"
+                  >
+                </div>
+                <button type="submit" class="btn-pay-now">Pay Now</button>
+              </form>
+
+            {% elif appointment.status|lower == 'paid' %}
+              <form method="post" action="{% url 'cancel_apppat' appointment.a_id %}#c">
+                {% csrf_token %}
+                <button type="submit" class="btn-cancel" onclick="return confirm('Are you sure you want to cancel this appointment?');">
+                  Cancel
+                </button>
+              </form>
+            {% else %}
+              {{ appointment.status|capfirst }}
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" style="text-align:center; color:#555;">No appointments found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

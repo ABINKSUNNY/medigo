@@ -1,0 +1,82 @@
+{#{% extends 'temp/admin_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{#  <center>#}
+{#   <h1 align="center">HOSPITALS</h1>#}
+{#    <br>#}
+{##}
+{#     <table align="center" border="1">#}
+{#       <tr>#}
+{#         <td>Slno</td>#}
+{#         <td>HOSPITAL NAME</td>#}
+{#         <td>ADDRESS</td>#}
+{#         <td>CONTACT</td>#}
+{#         <td>EMAIL</td>#}
+{#         <td>SPECIALITY</td>#}
+{#         <td>DEPARTMENT</td>#}
+{#       </tr>#}
+{#{%  for i in ob %}#}
+{#       <tr>#}
+{#       <td></td>#}
+{#         <td>{{ i.hospitalname }}</td>#}
+{#         <td>{{ i.address }}</td>#}
+{#         <td>{{ i.contact }}</td>#}
+{#         <td>{{ i.email }}</td>#}
+{#         <td>{{ i.speciality }}</td>#}
+{#         <td>{{ i.department }}</td>#}
+{#         <td><a href="{% url 'delet' idd=i.h_id %}">Remove</a></td>#}
+{##}
+{##}
+{#       </tr>#}
+{#         {% endfor %}#}
+{#     </table>#}
+{#  </center>#}
+{# </body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+
+{% extends 'temp/admin_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px">
+  <div class="card">
+    <h1>Hospitals</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Slno</th>
+          <th>Hospital Name</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Speciality</th>
+{#          <th>Department</th>#}
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in ob %}
+        <tr>
+          <td data-label="Slno">{{ forloop.counter }}</td>
+          <td data-label="Hospital Name">{{ i.hospitalname }}</td>
+          <td data-label="Address">{{ i.address }}</td>
+          <td data-label="Contact">{{ i.contact }}</td>
+          <td data-label="Email">{{ i.email }}</td>
+          <td data-label="Speciality">{{ i.speciality }}</td>
+{#          <td data-label="Department">{{ i.department }}</td>#}
+          <td data-label="Action">
+            <a href="{% url 'delet' idd=i.h_id %}#c" style="color:#d9534f; font-weight:bold;" onclick="return confirm('Are you sure you want to remove this hospital?')">Remove</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8" style="text-align:center;">No hospitals found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

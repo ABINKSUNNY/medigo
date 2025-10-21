@@ -1,0 +1,29 @@
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+    <section id="c" >
+<div style="max-width: 600px; margin: auto; padding: 30px; text-align: center;">
+    <h2>Checkout</h2>
+    <p>Total Amount: ₹{{ total_amount }}</p>
+
+    <form action="{% url 'verify_payment' %}#c" method="POST">
+        {% csrf_token %}
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key }}"
+            data-amount="{{ total_amount|floatformat:'0' }}00"
+            data-currency="INR"
+            data-order_id="{{ order_id }}"
+            data-buttontext="Pay with Razorpay"
+            data-name="Online Pharmacy"
+            data-description="Medicine Order"
+            data-image="https://yourdomain.com/static/logo.png"  <!-- Optional -->
+            data-prefill.name="{{ request.user.username }}"
+            data-theme.color="#0a5f54">
+        </script>
+    </form>
+
+    <p style="margin-top: 20px;"><a href="{% url 'cart' %}#c" style="color: #0a5f54;">Back to Cart</a></p>
+</div>
+</section>
+{% endblock %}
+

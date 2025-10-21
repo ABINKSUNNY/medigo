@@ -1,0 +1,31 @@
+<!-- templates/appointment/enter_amount.html -->
+{#{% extends 'temp/patient_home.html' %}#}
+{##}
+{#{% block base %}#}
+{#<div class="container mt-5">#}
+{#    <h3>Enter Payment Amount for Appointment #{{ appointment.a_id }}</h3>#}
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <input type="number" name="amount" min="1" required class="form-control mb-3" placeholder="Enter amount in ₹">#}
+{#        <button type="submit" class="btn btn-primary">Proceed to Payment</button>#}
+{#    </form>#}
+{#</div>#}
+{#{% endblock %}#}
+
+
+{% extends 'temp/patient_home.html' %}
+{% block base %}
+<div class="container mt-5">
+  <h3>Pay ₹{{ fee }} for Appointment #{{ appointment.a_id }}</h3>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Amount (₹)</label>
+      <input type="number" name="amount" value="{{ fee }}" readonly class="form-control">
+    </div>
+    {# Hidden input ensures server-proof #}
+    <input type="hidden" name="confirmed_amount" value="{{ fee }}">
+    <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+  </form>
+</div>
+{% endblock %}

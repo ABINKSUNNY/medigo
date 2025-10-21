@@ -1,0 +1,37 @@
+{% extends 'temp/pharmacy_home.html' %}
+{% block base %}
+<section id="c" style="padding-top:100px ">
+  <div class="card" style="max-width: 1100px; margin: auto; padding: 20px;">
+    <h1>Payments</h1>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+
+        <tr>
+          <th>SlNo</th>
+          <th>Purchase ID</th>
+          <th>Patient ID</th>
+          <th>Customer</th>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in cd %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.pu_id }}</td>
+                <td>{{ i.patient_id }}</td>
+                <td>{{ i.patient.name }}</td>
+                <td>{{ i.payment_id }}</td>
+                <td>{{ i.total_amount }}</td>
+                <td>{{ i.timestamp }}</td>
+
+              </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

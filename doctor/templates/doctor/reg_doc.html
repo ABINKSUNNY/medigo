@@ -1,0 +1,275 @@
+{#{% extends 'temp/hospital_home.html' %}#}
+{#{% block base %}#}
+{#    <section id="c" >#}
+{#<body>#}
+{# <center>#}
+{#   <h1 align="center">Doctor Registration</h1>#}
+{#    <form method="post">#}
+{#    {% csrf_token %}#}
+{#     <table align="center">#}
+{##}
+{#      <tr>#}
+{#       <td>Doctor Name:</td>#}
+{#       <td><input type="text" name="doc_name" value="" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Age:</td>#}
+{#       <td><input type="text" name="doc_age" value="" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Email:</td>#}
+{#       <td><input type="text" name="email" value="" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Contact:</td>#}
+{#       <td><input type="text" name="contact" value="" ></td>#}
+{#      </tr>#}
+{##}
+{#         <tr>#}
+{#           <td><label>Gender:</label></td>#}
+{#           <td><input type="radio" name="gender" value="female"> Female#}
+{#           <input type="radio" name="gender" value="male"> Male#}
+{#           <input type="radio" name="gender" value="other"> Others</td>#}
+{##}
+{#         </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Specialization:</td>#}
+{#       <td><input type="text" name="specialization" value="" ></td>#}
+{#      </tr>#}
+{##}
+{#      <tr>#}
+{#       <td>Qualification:</td>#}
+{#       <td><input type="text" name="qualification" value=""> </td>#}
+{#     </tr>#}
+{#         <tr>#}
+{#       <td>Department:</td>#}
+{#       <td><input type="text" name="department" value=""> </td>#}
+{#     </tr>#}
+{##}
+{#      <tr>#}
+{##}
+{#       <td>Consulting Hours:</td>#}
+{#       <td><input type="text" name="consulting_hours" value="" ></td>#}
+{#     </tr>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#       <td><input type="submit"value="Register"></td>#}
+{##}
+{#    </table>#}
+{#   </form>#}
+{#  </center>#}
+{#</body>#}
+{#    </section>#}
+{#{% endblock %}#}
+{#</html>#}
+
+{% extends 'temp/hospital_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px;">
+<style>
+  .registration-wrapper {
+    background: #eef3f8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .registration-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .registration-title {
+    text-align: center;
+    font-size: 26px;
+    color: #1c4e80;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="file"],
+  .form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #1c4e80;
+    outline: none;
+  }
+
+  .gender-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: #1c4e80;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: #16406a;
+  }
+</style>
+
+<div class="registration-wrapper">
+  <div class="registration-card">
+    <h2 class="registration-title">Doctor Registration</h2>
+    {% if error %}
+        <div style="background-color: #ffe0e0; color: #b10000; padding: 10px; border-radius: 6px; margin-bottom: 10px; text-align: center;">
+        {{ error }}
+         </div>
+    {% elif msg %}
+        <div style="background-color: #e0ffe5; color: #007a1c; padding: 10px; border-radius: 6px; margin-bottom: 10px; text-align: center;">
+        {{ msg }}
+        </div>
+    {% endif %}
+
+
+    <form method="post" onsubmit="return validateDoctorForm();">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label>Doctor Name</label>
+        <input type="text" name="doc_name">
+      </div>
+
+      <div class="form-group">
+        <label>Age</label>
+        <input type="text" name="doc_age">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="email">
+      </div>
+
+      <div class="form-group">
+        <label>Contact</label>
+        <input type="text" name="contact">
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Specialization</label>
+        <input type="text" name="specilization">
+      </div>
+
+      <div class="form-group">
+        <label>Qualification</label>
+        <input type="text" name="qualification">
+      </div>
+
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" name="deparment">
+      </div>
+
+      <div class="form-group">
+        <label>Consulting Hours</label>
+        <input type="text" name="cousulting_hour">
+      </div>
+
+      <div class="form-group">
+        <label>Consulting fee</label>
+        <input type="text" name="consultation_fee">
+      </div>
+
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function validateDoctorForm() {
+    const name = document.getElementsByName('doc_name')[0].value.trim();
+    const age = document.getElementsByName('doc_age')[0].value.trim();
+    const email = document.getElementsByName('email')[0].value.trim();
+    const contact = document.getElementsByName('contact')[0].value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const specialization = document.getElementsByName('specialization')[0].value.trim();
+    const qualification = document.getElementsByName('qualification')[0].value.trim();
+    const department = document.getElementsByName('department')[0].value.trim();
+    const hours = document.getElementsByName('consulting_hours')[0].value.trim();
+    const consultation_fee = document.getElementsByName('consultation_fee')[0].value.trim();
+
+    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    const contactPattern = /^[0-9]{10}$/;
+
+    if (!name || !age || !email || !contact || !gender || !specialization || !qualification || !consultation_fee || !department || !hours) {
+      alert("Please fill in all fields.");
+      return false;
+    }
+
+    if (isNaN(age) || age < 21 || age > 80) {
+      alert("Please enter a valid age between 21 and 80.");
+      return false;
+    }
+
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    if (!contactPattern.test(contact)) {
+      alert("Please enter a valid 10-digit contact number.");
+      return false;
+    }
+
+    return true;
+  }
+</script>
+</section>
+{% endblock %}

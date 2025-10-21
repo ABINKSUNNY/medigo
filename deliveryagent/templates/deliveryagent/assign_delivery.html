@@ -1,0 +1,82 @@
+{#{% extends 'temp/pharmacy_home.html' %}#}
+{#{% block base %}#}
+{#<section id="c">#}
+{#<section id="content">#}
+{#  <center>#}
+{#    {% if message %}#}
+{#      <p style="color: green;"><strong>{{ message }}</strong></p>#}
+{#    {% endif %}#}
+{##}
+{#    {% if purchases %}#}
+{#      {% for p in purchases %}#}
+{#        <h3>Assign Agent to Purchase ID: {{ p.pu_id }}</h3>#}
+{#        <table border="1" cellpadding="10">#}
+{#          <tr>#}
+{#            <th>Agent Name</th>#}
+{#            <th>Contact</th>#}
+{#            <th>Address</th>#}
+{#            <th>Action</th>#}
+{#          </tr>#}
+{#          {% for i in ac %}#}
+{#          <tr>#}
+{#            <td>{{ i.name }}</td>#}
+{#            <td>{{ i.phno }}</td>#}
+{#            <td>{{ i.address }}</td>#}
+{#            <td>#}
+{#              <a href="{% url 'assign' %}?da_id={{ i.da_id }}&pu_id={{ p.pu_id }}#c">Assign</a>#}
+{#            </td>#}
+{#          </tr>#}
+{#          {% endfor %}#}
+{#        </table>#}
+{#      {% endfor %}#}
+{#    {% else %}#}
+{#      <p>No purchase found for assignment.</p>#}
+{#    {% endif %}#}
+{#  </center>#}
+{#</section>#}
+{#</section>#}
+{#{% endblock %}#}
+
+
+
+
+{% extends 'temp/pharmacy_home.html' %}
+{% block base %}
+<section id="c" style="padding-top: 100px;">
+  <div class="card">  <!-- Use styled card container -->
+    {% if message %}
+  <p style="color: green; font-weight: bold; text-align: center;">{{ message }}</p>
+{% endif %}
+
+    {% if purchases %}
+      {% for p in purchases %}
+        <h3>Assign Agent to Purchase ID: {{ p.pu_id }}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Agent Name</th>
+              <th>Contact</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in ac %}
+            <tr>
+              <td>{{ i.name }}</td>
+              <td>{{ i.phno }}</td>
+              <td>{{ i.address }}</td>
+              <td>
+                <a class="btn btn-primary" href="{% url 'assign' %}?da_id={{ i.da_id }}&pu_id={{ p.pu_id }}#c">Assign</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+    {% else %}
+      <p>No purchase found for assignment.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
