@@ -14,6 +14,16 @@ Medigo, a robust and comprehensive healthcare web application designed to bridge
 
 - Order medicines online
 
+
+### TECHNOLOGIES USED
+
+
+- Python
+- SQL
+- HTML
+- css
+- JavaScript
+
 ## CONCLUSION
 
 Medigo represents a significant advancement in the digital transformation of healthcare services. By seamlessly integrating essential healthcare functionalities—such as hospital discovery, doctor consultations, pharmacy ordering, and appointment scheduling—into a single, user-friendly platform, Medigo simplifies and streamlines the entire patient journey, from discovery to delivery.
